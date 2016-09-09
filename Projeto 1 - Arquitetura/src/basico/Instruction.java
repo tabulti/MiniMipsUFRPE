@@ -261,26 +261,8 @@ public class Instruction {
 		if(operation != null){
 			setOperationName(operation.toLowerCase());
 		}
-
-		setupInstructionByType(getType(), getOperationName(), instructionBin);
 	}
 
-	public void setupInstructionByType(String type, String operation, String instructionBin){
-		String inst = operation;
-
-		if(type == "R"){
-			setRs(" $" + instructionBin.substring(6, 11) + ",");
-			setRd(" $" + instructionBin.substring(11, 16) + ",");
-			setRt(" $" + instructionBin.substring(16, 21));
-		}
-		else if(type == "I"){
-			//TODO
-		}
-		else if(type == "J"){
-			//TODO
-		}
-
-	}
 
 	public String printInstByType(String type) {
 		if (type == "R") {

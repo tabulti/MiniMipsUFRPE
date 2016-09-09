@@ -15,12 +15,6 @@ public class Main {
 		
 		instructionsArray = Utils.readFiles();
 		
-		/*for (String string : instructionsArray) {
-			System.out.println(string);
-		}
-		
-		System.out.println("*-----------------------------*");*/
-		
 		for (String string : instructionsArray) {
 			String numberConvertido = Utils.formater(Utils.converter(string));
 			
@@ -29,18 +23,12 @@ public class Main {
 			System.out.println(string);
 			System.out.println(numberConvertido);
 //			System.out.println("A operação identificada é de: " + instruction.getOperationName());
-			System.out.println(instruction.printInstByType(instruction.getType()) + "\n");
+//			System.out.println(instruction.printInstByType(instruction.getType()) + "\n");
+			System.out.println(instruction.getOperationName().concat(instruction.getRs()
+					+ instruction.getRd())
+					+ instruction.getRt());
 		}
-		
-		//teste
-	/*	String numberConvertido = Utils.formater(Utils.converter("A"));
-		
-		instruction.verifyOperationType(numberConvertido);
-		
-		System.out.println(numberConvertido);*/
-		//fim de teste
-		
-		
+
 		System.out.println("A operação identificada é de: " 
 				+ instruction.getOperationName());
 		

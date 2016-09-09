@@ -9,15 +9,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static java.lang.Integer.parseInt;
+
 public class Utils {
 	
 	private static String FILE_PATH_OUTPUT = "C:\\New folder/saida_novo.txt";
-	private static String FILE_PATH_INPUT = "C:\\Users\\Joao Paulo Ribeiro\\Desktop\\Projeto MiniMips 1° Parte\\Projeto 1 - Arquitetura/entrada.txt";
+	private static String FILE_PATH_INPUT = "C:\\Users\\Joao Paulo Ribeiro\\Documents\\MiniMipsUFRPE\\Projeto 1 - Arquitetura/entrada.txt";
 	
 	
 	public static String converter(String number){
 		number = number.substring(2,10);//removendo 0x do inicio
-		return Integer.toBinaryString(Integer.parseInt(number, 16));
+		return Integer.toBinaryString(parseInt(number, 16));
 	}
 	
 	public static String formater(String number){
@@ -32,6 +34,35 @@ public class Utils {
 		}
 		
 		return new String(arrayToConcat).concat(number);
+	}
+
+	public static String binToDecimal(String string){
+		int num = Integer.valueOf(parseInt(string));
+		int decimal = 0;
+		int potencia = 0;
+
+		for(int i = string.length() - 1; i >= 0; i--){
+			decimal += Math.pow(2, potencia) *
+					Character.getNumericValue(string.charAt(i));
+			potencia++;
+		}
+		return decimal + "";
+	}
+
+	public static String formaterRegistersToDecimal(String instructionBin, String typeInstruction){
+		if(typeInstruction == "R"){
+			String rs = " $" + binToDecimal(instructionBin.substring(6, 11)) + ",";
+			String rd = " $" + binToDecimal(instructionBin.substring(11, 16)) + ",";
+			String rt = " $" + binToDecimal(instructionBin.substring(16, 21));
+			return rs + rd + rt;
+		}
+		else if(typeInstruction == "I"){
+			//TODO
+		}
+		else if(typeInstruction == "J"){
+			//TODO
+		}
+		return null;
 	}
 	
 	//TODO: tratar os caracteres 0x...
