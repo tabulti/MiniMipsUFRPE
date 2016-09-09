@@ -63,7 +63,6 @@ public class Instruction {
 	public static final String BEQ = "000100";
 	public static final String BLTZ = "000001";
 	public static final String BNE = "000101";
-	
 
 	public Instruction(){
 			this.operationName = null;
@@ -103,85 +102,118 @@ public class Instruction {
 		this.rt = rt;
 	}
 
+	public String set3Registers(String instructionBin){
+		return " $" + instructionBin.substring(6, 11) + ","
+				+ " $" + instructionBin.substring(11, 16) + ","
+				+ " $" + instructionBin.substring(16, 21);
+	}
+
 
 	public String verifyOperationSubType(String instructionBin){
 		String operation = null;
 		String type = null;
+		String threeRegisters = null;
 		switch(instructionBin.substring(26, 32)){
 			case ADD_END:
-				operation = "ADD";
+				operation = "add";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case AND_END:
-				operation = "AND";
+				operation = "and";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SUB_END:
-				operation = "SUB";
+				operation = "sub";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SLT_END:
-				operation = "SLT";
+				operation = "slt";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case OR_END:
-				operation = "OR";
+				operation = "or";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case NOR_END:
-				operation = "NOR";
+				operation = "nor";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case XOR_END:
-				operation = "XOR";
+				operation = "xor";
 				type = "R";
 				break;
 			case JR_END:
-				operation = "JR";
+				operation = "jr";
 				type = "R";
 				break;
 			case MFHI_END:
-				operation = "MFHI";
+				operation = "mfhi";
 				type = "R";
 				break;
 			case MFLO_END:
-				operation = "MFLO";
+				operation = "mflo";
 				type = "R";
 				break;
 			case ADDU_END:
-				operation = "ADDU";
+				operation = "addu";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SUBU_END:
-				operation = "SUBU";
+				operation = "subu";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case MULT_END:
-				operation = "MULT";
+				operation = "mult";
 				type = "R";
 				break;
 			case SLL:
-				operation = "SLL";
+				operation = "sll";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SRL_END:
-				operation = "SRL";
+				operation = "srl";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SRA_END:
-				operation = "SRA";
+				operation = "sra";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SRLV_END:
-				operation = "SRLV";
+				operation = "srlv";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SRAV_END:
-				operation = "SRAV";
+				operation = "srav";
 				type = "R";
-				break;
+				threeRegisters = set3Registers(instructionBin);
+				return operation + threeRegisters;
+
 			case SYSCALL_END:
-				operation = "SYSCALL";
+				operation = "syscall";
 				break;
 		}
 		if(type != null){
@@ -193,65 +225,66 @@ public class Instruction {
 	public void verifyOperationType(String instructionBin){
 		String operation = null;
 		String type = null;
+		String instructionOutput = null;
 		
 		switch(instructionBin.substring(0, 6)){
 			case "000000":
 				operation = verifyOperationSubType(instructionBin);
 				break;
 			case LUI:
-				operation = "LUI";
+				operation = "lui";
 				type = "I";
 				break;
 			case ADDI:
-				operation = "ADDI";
+				operation = "addi";
 				type = "I";
 				break;
 			case SLTI:
-				operation = "SLTI";
+				operation = "slti";
 				type = "I";
 				break;
 			case ANDI:
-				operation = "ANDI";
+				operation = "andi";
 				type = "I";
 				break;
 			case ORI:
-				operation = "ORI";
+				operation = "ori";
 				type = "I";
 				break;
 			case XORI:
-				operation = "XORI";
+				operation = "xori";
 				type = "I";
 				break;
 			case LW:
-				operation = "LW";
+				operation = "lw";
 				type = "I";
 				break;
 			case SW:
-				operation = "SW";
+				operation = "sw";
 				type = "I";
 				break;
 			case J:
-				operation = "J";
+				operation = "j";
 				type = "J";
 				break;
 			case BLTZ:
-				operation = "BLTZ";
+				operation = "bltz";
 				type = "I";
 				break;
 			case BEQ:
-				operation = "BEQ";
+				operation = "beq";
 				type = "I";
 				break;
 			case BNE:
-				operation = "BNE";
+				operation = "bne";
 				type = "I";
 				break;
 			case ADDIU:
-				operation = "ADDIU";
+				operation = "addiu";
 				type = "I";
 				break;
 			case JAL:
-				operation = "JAL";
+				operation = "jal";
 				type = "J";
 				break;
 		}
@@ -259,14 +292,15 @@ public class Instruction {
 			setType(type);
 		}
 		if(operation != null){
-			setOperationName(operation.toLowerCase());
+			setOperationName(operation);
 		}
 
-		setupInstructionByType(getType(), getOperationName(), instructionBin);
+		//setupInstructionByType(operation, instructionBin);
+
+		//return instructionOutput;
 	}
 
-	public void setupInstructionByType(String type, String operation, String instructionBin){
-		String inst = operation;
+	public void setupInstructionByType(String operation, String instructionBin){
 
 		if(type == "R"){
 			setRs(" $" + instructionBin.substring(6, 11) + ",");
@@ -279,12 +313,15 @@ public class Instruction {
 		else if(type == "J"){
 			//TODO
 		}
-
 	}
 
 	public String printInstByType(String type) {
 		if (type == "R") {
-			return this.getOperationName().concat(this.getRs()).concat(this.getRd()).concat(this.getRt());
+			return this
+					.getOperationName()
+					.concat(this.getRs())
+					.concat(this.getRd())
+					.concat(this.getRt());
 		} else if (type == "I") {
 			return null;
 		} else if (type == "J") {
