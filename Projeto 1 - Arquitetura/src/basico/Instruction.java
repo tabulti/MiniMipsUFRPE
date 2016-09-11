@@ -1,68 +1,17 @@
 package basico;
 
+/**
+ * Created by Joao Paulo Ribeiro on 08/09/2016.
+ */
+
 public class Instruction {
 	private String rs;
 	private String rd;
 	private String rt;
 	private String type;
 	private String operationName = null;
-	
-	public static final String ADD = "000000";
-	public static final String ADD_END = "100000";
-	public static final String AND = "000000";
-	public static final String AND_END = "100100";
-	public static final String SUB = "000000";
-	public static final String SUB_END = "100010";
-	public static final String SLT = "000000";
-	public static final String SLT_END = "101010";
-	public static final String OR = "000000";
-	public static final String OR_END = "100101";
-	public static final String NOR = "000000";
-	public static final String NOR_END = "100111";
-	public static final String XOR = "000000";
-	public static final String XOR_END = "100110";
-	public static final String JR = "000000";
-	public static final String JR_END = "001000";
-	public static final String MFHI = "000000";
-	public static final String MFHI_END = "010000";
-	public static final String MFLO = "000000";
-	public static final String MFLO_END = "010010";
-	public static final String ADDU = "000000";
-	public static final String ADDU_END = "100001";
-	public static final String SUBU = "000000";
-	public static final String SUBU_END = "100011";
-	public static final String MULT = "000000";
-	public static final String MULT_END = "011000";
-	public static final String MULTU = "000000";
-	public static final String MULTU_END = "011001";
-	public static final String SLL = "000000";
-	public static final String SLLV = "000000";
-	public static final String SLLV_END = "000100";
-	public static final String SRL = "000000";
-	public static final String SRL_END = "000010";
-	public static final String SRA = "000000";
-	public static final String SRA_END = "000011";
-	public static final String SRLV = "000000";
-	public static final String SRLV_END = "000110";
-	public static final String SRAV = "000000";
-	public static final String SRAV_END = "000111";
-	public static final String SYSCALL = "000000";
-	public static final String SYSCALL_END = "001100";
-	
-	public static final String SLTI = "001010";
-	public static final String XORI = "001110";
-	public static final String ORI = "001101";
-	public static final String JAL = "000011";
-	public static final String ADDI = "001000";
-	public static final String ADDIU = "001001";
-	public static final String LUI = "001111";
-	public static final String LW = "100011";
-	public static final String SW = "101011";
-	public static final String J = "000010";
-	public static final String ANDI = "001100";
-	public static final String BEQ = "000100";
-	public static final String BLTZ = "000001";
-	public static final String BNE = "000101";
+	private int qtdRegistres = 0;
+	private boolean hasImmediate = false;
 	
 
 	public Instruction(){
@@ -71,6 +20,7 @@ public class Instruction {
 			this.rs = null;
 			this.rd = null;
 			this.rt = null;
+			this.qtdRegistres = 0;
 		}
 	public String getOperationName() {
 		return this.operationName;
@@ -87,6 +37,9 @@ public class Instruction {
 	public String getRt(){
 		return this.rt;
 	}
+	public int getQtdRegistres(){
+		return  this.qtdRegistres;
+	}
 	public void setOperationName(String operationName) {
 		this.operationName = operationName;
 	}
@@ -102,176 +55,255 @@ public class Instruction {
 	public void setRt(String rt){
 		this.rt = rt;
 	}
+	public void setQtdRegistrers(int qtd){
+		this.qtdRegistres = qtdRegistres;
+	}
 
 
+	/**
+	 * Método que seta os parametros de uma instrução de acordo com os subtipos
+	 * da operação "000000"
+	 * @param instructionBin
+	 * @return
+	 */
 	public String verifyOperationSubType(String instructionBin){
 		String operation = null;
 		String type = null;
+		int qtd_registres = 0;
+
+
 		switch(instructionBin.substring(26, 32)){
-			case ADD_END:
-				operation = "ADD";
-				type = "R";
+			case Consts.ADD_END:
+				operation = "add";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case AND_END:
-				operation = "AND";
-				type = "R";
+
+			case Consts.AND_END:
+				operation = "and";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SUB_END:
-				operation = "SUB";
-				type = "R";
+
+			case Consts.SUB_END:
+				operation = "sub";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SLT_END:
-				operation = "SLT";
-				type = "R";
+
+			case Consts.SLT_END:
+				operation = "slt";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case OR_END:
-				operation = "OR";
-				type = "R";
+
+			case Consts.OR_END:
+				operation = "or";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case NOR_END:
-				operation = "NOR";
-				type = "R";
+
+			case Consts.NOR_END:
+				operation = "nor";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case XOR_END:
-				operation = "XOR";
-				type = "R";
+
+			case Consts.XOR_END:
+				operation = "xor";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case JR_END:
-				operation = "JR";
-				type = "R";
+			case Consts.JR_END:
+				operation = "jr";
+				type = Consts.TYPE_R;
 				break;
-			case MFHI_END:
-				operation = "MFHI";
-				type = "R";
+			case Consts.MFHI_END:
+				operation = "mfhi";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
 				break;
-			case MFLO_END:
-				operation = "MFLO";
-				type = "R";
+			case Consts.MFLO_END:
+				operation = "mflo";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
 				break;
-			case ADDU_END:
-				operation = "ADDU";
-				type = "R";
+			case Consts.ADDU_END:
+				operation = "addu";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SUBU_END:
-				operation = "SUBU";
-				type = "R";
+
+			case Consts.SUBU_END:
+				operation = "subu";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case MULT_END:
-				operation = "MULT";
-				type = "R";
+
+			case Consts.MULT_END:
+				operation = "mult";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
 				break;
-			case SLL:
-				operation = "SLL";
-				type = "R";
+			case Consts.SLL:
+				operation = "sll";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SRL_END:
-				operation = "SRL";
-				type = "R";
+
+			case Consts.SRL_END:
+				operation = "srl";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SRA_END:
-				operation = "SRA";
-				type = "R";
+
+			case Consts.SRA_END:
+				operation = "sra";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SRLV_END:
-				operation = "SRLV";
-				type = "R";
+
+			case Consts.SRLV_END:
+				operation = "srlv";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SRAV_END:
-				operation = "SRAV";
-				type = "R";
+
+			case Consts.SRAV_END:
+				operation = "srav";
+				type = Consts.TYPE_R;
+				qtd_registres = Consts.TYPE_3_REGISTRERS;
 				break;
-			case SYSCALL_END:
-				operation = "SYSCALL";
+
+			case Consts.SYSCALL_END:
+				operation = "syscall";
 				break;
 		}
 		if(type != null){
-			setType(type);
+			this.setType(type);
+		}
+		if(qtd_registres != 0){
+			this.setQtdRegistrers(qtd_registres);
 		}
 		return operation;
 	}
-	
+
+	/**
+	 * Metodo que verifica o tipo da operação e seta os parametros da instrução
+	 * @param instructionBin
+	 */
 	public void verifyOperationType(String instructionBin){
 		String operation = null;
 		String type = null;
+		int qtd_registres = 0;
 		
 		switch(instructionBin.substring(0, 6)){
 			case "000000":
 				operation = verifyOperationSubType(instructionBin);
 				break;
-			case LUI:
-				operation = "LUI";
-				type = "I";
+			case Consts.LUI:
+				operation = "lui";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case ADDI:
-				operation = "ADDI";
-				type = "I";
+			case Consts.ADDI:
+				operation = "addi";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case SLTI:
-				operation = "SLTI";
-				type = "I";
+			case Consts.SLTI:
+				operation = "slti";
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
+				type = Consts.TYPE_I;
 				break;
-			case ANDI:
-				operation = "ANDI";
-				type = "I";
+			case Consts.ANDI:
+				operation = "andi";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case ORI:
-				operation = "ORI";
-				type = "I";
+			case Consts.ORI:
+				operation = "ori";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case XORI:
-				operation = "XORI";
-				type = "I";
+			case Consts.XORI:
+				operation = "xori";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case LW:
-				operation = "LW";
-				type = "I";
+			//TODO: lw $1, 100($2)
+			case Consts.LW:
+				operation = "lw";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
 				break;
-			case SW:
-				operation = "SW";
-				type = "I";
+			//TODO: sw $1, 100($2)
+			case Consts.SW:
+				operation = "sw";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
 				break;
-			case J:
-				operation = "J";
-				type = "J";
+			//TODO: j start
+			case Consts.J:
+				operation = "j";
+				type = Consts.TYPE_J;
 				break;
-			case BLTZ:
-				operation = "BLTZ";
-				type = "I";
+			//TODO: bltz $1, start
+			case Consts.BLTZ:
+				operation = "bltz";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_1_REGISTRERS;
 				break;
-			case BEQ:
-				operation = "BEQ";
-				type = "I";
+			//TODO: beq $1, $2, start
+			case Consts.BEQ:
+				operation = "beq";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
 				break;
-			case BNE:
-				operation = "BNE";
-				type = "I";
+			//TODO: bne $1, $2, start
+			case Consts.BNE:
+				operation = "bne";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
 				break;
-			case ADDIU:
-				operation = "ADDIU";
-				type = "I";
+			case Consts.ADDIU:
+				operation = "addiu";
+				type = Consts.TYPE_I;
+				qtd_registres = Consts.TYPE_2_REGISTRERS;
+				hasImmediate = true;
 				break;
-			case JAL:
-				operation = "JAL";
-				type = "J";
+			//TODO: jal start
+			case Consts.JAL:
+				operation = "jal";
+				type = Consts.TYPE_J;
 				break;
 		}
 		if (type != null) {
-			setType(type);
+			this.setType(type);
 		}
 		if(operation != null){
-			setOperationName(operation.toLowerCase());
+			this.setOperationName(operation);
+		}
+		if(qtd_registres != 0){
+			this.setQtdRegistrers(qtd_registres);
 		}
 	}
 
-
-	public String printInstByType(String type) {
-		if (type == "R") {
-			return this.getOperationName().concat(this.getRs()).concat(this.getRd()).concat(this.getRt());
-		} else if (type == "I") {
-			return null;
-		} else if (type == "J") {
-			return null;
-		}
-		return null;
+	/**
+	 * Método que extrai 3 registradores de uma instrução tipo R
+	 * convertendo-os para o formato decimal
+	 * @param instructionBin
+	 */
+	public void setupInstructionTypeR3Registrers(String instructionBin){
+		this.setRs(" " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ",");
+		this.setRt(" " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ",");
+		this.setRd(" " + "$" + Utils.binToDecimal(instructionBin.substring(16, 21)));
 	}
+
 }

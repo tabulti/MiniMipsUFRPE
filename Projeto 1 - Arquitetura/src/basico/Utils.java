@@ -1,5 +1,9 @@
 package basico;
 
+/**
+ * Created by Joao Paulo Ribeiro on 08/09/2016.
+ */
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,13 +19,23 @@ public class Utils {
 	
 	private static String FILE_PATH_OUTPUT = "C:\\New folder/saida_novo.txt";
 	private static String FILE_PATH_INPUT = "C:\\Users\\Joao Paulo Ribeiro\\Documents\\MiniMipsUFRPE\\Projeto 1 - Arquitetura/entrada.txt";
-	
-	
+
+    /**
+     * Método que converte um numero hexadecimal no formato 0x0000000000
+     * para um binário de 32 bits
+     * @param number
+     * @return
+     */
 	public static String converter(String number){
 		number = number.substring(2,10);//removendo 0x do inicio
 		return Integer.toBinaryString(parseInt(number, 16));
 	}
-	
+
+    /**
+     * Método que completa um binario com menos de 32 bits com 0's a esquerda
+     * @param number
+     * @return
+     */
 	public static String formater(String number){
 		int aux = 32 - number.length();
 		char[] arrayToConcat;
@@ -32,41 +46,29 @@ public class Utils {
 				arrayToConcat[i] = '0';
 			}
 		}
-		
 		return new String(arrayToConcat).concat(number);
 	}
 
+    /**
+     * Método que converte um binário para decimal
+     * @param string
+     * @return
+     */
 	public static String binToDecimal(String string){
-		int num = Integer.valueOf(parseInt(string));
 		int decimal = 0;
 		int potencia = 0;
 
 		for(int i = string.length() - 1; i >= 0; i--){
-			decimal += Math.pow(2, potencia) *
-					Character.getNumericValue(string.charAt(i));
+			decimal += Math.pow(2, potencia) * Character.getNumericValue(string.charAt(i));
 			potencia++;
 		}
 		return decimal + "";
 	}
 
-	public static String formaterRegistersToDecimal(String instructionBin, String typeInstruction){
-		if(typeInstruction == "R"){
-			String rs = " $" + binToDecimal(instructionBin.substring(6, 11)) + ",";
-			String rd = " $" + binToDecimal(instructionBin.substring(11, 16)) + ",";
-			String rt = " $" + binToDecimal(instructionBin.substring(16, 21));
-			return rs + rd + rt;
-		}
-		else if(typeInstruction == "I"){
-			//TODO
-		}
-		else if(typeInstruction == "J"){
-			//TODO
-		}
-		return null;
-	}
-	
-	//TODO: tratar os caracteres 0x...
-	@SuppressWarnings("null")
+    /**
+     * Metodo para ler instruções de um arquivo txt
+     * @return
+     */
 	public static ArrayList<String> readFiles(){
 		ArrayList<String> instructionsArray = new ArrayList<>();
 		int i = 0;
@@ -94,8 +96,11 @@ public class Utils {
 		
 		return instructionsArray;
 	}
-	
-	
+
+    /**
+     * Método para escrever instruções em um arquivo txt.
+     * @param instructions
+     */
 	public static void writeFiles(String[] instructions){
 		File file = new File(FILE_PATH_OUTPUT);
 		try {
