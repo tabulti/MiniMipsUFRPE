@@ -11,14 +11,15 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 
 import static java.lang.Integer.parseInt;
 
 public class Utils {
 	
-	private static String FILE_PATH_OUTPUT = "C:\\New folder/saida_novo.txt";
-	private static String FILE_PATH_INPUT = "C:\\Users\\Joao Paulo Ribeiro\\Documents\\MiniMipsUFRPE\\Projeto 1 - Arquitetura/entrada.txt";
+	private static String FILE_PATH_OUTPUT = "arquivos/saida.txt";
+	private static String FILE_PATH_INPUT = "arquivos/entrada.txt";
 
     /**
      * Método que converte um numero hexadecimal no formato 0x0000000000
@@ -28,7 +29,8 @@ public class Utils {
      */
 	public static String converter(String number){
 		number = number.substring(2,10);//removendo 0x do inicio
-		return Integer.toBinaryString(parseInt(number, 16));
+		//return Integer.toBinaryString(parseInt(number, 16));
+		return new BigInteger(number, 16).toString(2);
 	}
 
     /**
