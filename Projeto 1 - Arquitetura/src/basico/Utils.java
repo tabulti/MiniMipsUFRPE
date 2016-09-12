@@ -103,7 +103,7 @@ public class Utils {
      * Método para escrever instruções em um arquivo txt.
      * @param instructions
      */
-	public static void writeFiles(String[] instructions){
+	public static void writeFiles(ArrayList<String> instructions){
 		File file = new File(FILE_PATH_OUTPUT);
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(file));
@@ -118,5 +118,5 @@ public class Utils {
 		}
 		
 	}
-	
+
 }

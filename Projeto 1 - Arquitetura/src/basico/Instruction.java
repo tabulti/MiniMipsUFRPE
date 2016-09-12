@@ -6,80 +6,6 @@ package basico;
 
 
 public class Instruction {
-    private String rs;
-    private String rd;
-    private String rt;
-    private String imm;
-    private String type;
-    private String operationName = null;
-    private int qtdRegistres = 0;
-    private boolean hasImmediate = false;
-
-    public Instruction() {
-        this.operationName = null;
-        this.type = null;
-        this.rs = null;
-        this.rd = null;
-        this.rt = null;
-        this.imm = null;
-        this.qtdRegistres = 0;
-    }
-
-    public String getOperationName() {
-        return this.operationName;
-    }
-
-    public String getType() {
-        return this.type;
-    }
-
-    public String getRs() {
-        return this.rs;
-    }
-
-    public String getRd() {
-        return this.rd;
-    }
-
-    public String getRt() {
-        return this.rt;
-    }
-
-    public String getImm() {
-        return imm;
-    }
-
-    public void setImm(String imm) {
-        this.imm = imm;
-    }
-
-    public int getQtdRegistres() {
-        return this.qtdRegistres;
-    }
-
-    public void setOperationName(String operationName) {
-        this.operationName = operationName;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public void setRs(String rs) {
-        this.rs = rs;
-    }
-
-    public void setRd(String rd) {
-        this.rd = rd;
-    }
-
-    public void setRt(String rt) {
-        this.rt = rt;
-    }
-
-    public void setQtdRegistrers(int qtd) {
-        this.qtdRegistres = qtdRegistres;
-    }
 
 
     /**
@@ -90,166 +16,129 @@ public class Instruction {
      * @return
      */
     public String verifyOperationSubType(String instructionBin) {
-        String operation = null;
-        String type = null;
-        int qtd_registres = 0;
+        String assemblyInstruction = "";
 
 
         switch (instructionBin.substring(26, 32)) {
             case Consts.ADD_END:
-                operation = "add";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("add" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
 
-            case Consts.AND_END:
-                operation = "and";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("and" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                assemblyInstruction = ("add" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
+
+                return assemblyInstruction;
+            case Consts.AND_END:
+
+                assemblyInstruction = ("and" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
 
             case Consts.SUB_END:
-                operation = "sub";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("sub" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+
+                assemblyInstruction = ("sub" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
+                return assemblyInstruction;
 
             case Consts.SLT_END:
-                operation = "slt";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("slt" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
 
+                assemblyInstruction = ("slt" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
+
+                return assemblyInstruction;
             case Consts.OR_END:
-                operation = "or";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("or" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                assemblyInstruction = ("or" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
 
+                return assemblyInstruction;
             case Consts.NOR_END:
-                operation = "nor";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("nor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+
+                assemblyInstruction = ("nor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
+                return assemblyInstruction;
 
             case Consts.XOR_END:
-                operation = "xor";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("xor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
-            case Consts.JR_END:
-                operation = "jr";
-                type = Consts.TYPE_R;
-                System.out.println("jr" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)));
-                break;
-            case Consts.MFHI_END:
-                operation = "mfhi";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                System.out.println("mfhi" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
-                break;
-            case Consts.MFLO_END:
-                operation = "mflo";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                System.out.println("mflo" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
-                break;
-            case Consts.ADDU_END:
-                operation = "addu";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("addu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
 
-            case Consts.SUBU_END:
-                operation = "subu";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("subu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                assemblyInstruction = ("xor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
+                return assemblyInstruction;
+            case Consts.JR_END:
+
+                assemblyInstruction = ("jr" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)));
+                return assemblyInstruction;
+            case Consts.MFHI_END:
+
+                assemblyInstruction = ("mfhi" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
+                return assemblyInstruction;
+            case Consts.MFLO_END:
+                assemblyInstruction = ("mflo" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
+                return assemblyInstruction;
+            case Consts.ADDU_END:
+
+                assemblyInstruction = ("addu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
+
+                return assemblyInstruction;
+            case Consts.SUBU_END:
+
+                assemblyInstruction = ("subu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
 
             case Consts.MULT_END:
-                operation = "mult";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                System.out.println("mult" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
-                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
-            case Consts.MULTU_END:
-                operation = "mult";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                System.out.println("multu" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
-                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
-            case Consts.SLL:
-                operation = "sll";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("sll" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
-                        + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
-                break;
 
-            case Consts.SRL_END:
-                operation = "srl";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("srl" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+                assemblyInstruction = ("mult" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
+                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
+            case Consts.MULTU_END:
+
+                assemblyInstruction = ("multu" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
+                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
+            case Consts.DIV_END:
+
+                assemblyInstruction = ("div" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
+                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
+            case Consts.SLL_END:
+
+                assemblyInstruction = ("sll" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
-                break;
+                return assemblyInstruction;
+            case Consts.SLLV_END:
+
+                assemblyInstruction = ("sllv" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
+
+                return assemblyInstruction;
+            case Consts.SRL_END:
+
+                assemblyInstruction = ("srl" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+                        + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
+                return assemblyInstruction;
 
             case Consts.SRA_END:
-                operation = "sra";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("sra" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+
+                assemblyInstruction = ("sra" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
-                break;
+                return assemblyInstruction;
 
             case Consts.SRLV_END:
-                operation = "srlv";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("srlv" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
+
+                assemblyInstruction = ("srlv" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
+                return assemblyInstruction;
 
             case Consts.SRAV_END:
-                operation = "srav";
-                type = Consts.TYPE_R;
-                qtd_registres = Consts.TYPE_3_REGISTRERS;
-                System.out.println("srav" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                break;
 
+                assemblyInstruction = ("srav" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
+                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
+
+                return assemblyInstruction;
             case Consts.SYSCALL_END:
-                operation = "syscall";
-                System.out.println("syscall");
-                break;
+                assemblyInstruction = "syscall";
+                return assemblyInstruction;
+
         }
-        if (type != null) {
-            this.setType(type);
-        }
-        if (qtd_registres != 0) {
-            this.setQtdRegistrers(qtd_registres);
-        }
-        return operation;
+        return null;
     }
 
     /**
@@ -257,147 +146,112 @@ public class Instruction {
      *
      * @param instructionBin
      */
-    public void verifyOperationType(String instructionBin) {
-        String operation = null;
-        String type = null;
-        String fullInstruction = "";
-        int qtd_registres = 0;
+    public String verifyOperationType(String instructionBin) {
+
+        String assemblyInstruction = "";
 
 
         switch (instructionBin.substring(0, 6)) {
             case "000000":
-                operation = verifyOperationSubType(instructionBin);
-                break;
+                assemblyInstruction = verifyOperationSubType(instructionBin);
+                return assemblyInstruction;
             case Consts.LUI:
-                operation = "lui";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("lui" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " +
-                        Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.ADDI:
-                operation = "addi";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("addi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.SLTI:
-                operation = "slti";
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                type = Consts.TYPE_I;
-                System.out.println("slti" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.ANDI:
-                operation = "andi";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("andi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.ORI:
-                operation = "ori";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("ori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.XORI:
-                operation = "xori";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("xori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            //TODO: lw $1, 100($2)
-            case Consts.LW:
-                operation = "lw";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                System.out.println("lw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
-                break;
-            //TODO: sw $1, 100($2)
-            case Consts.SW:
-                operation = "sw";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                System.out.println("sw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
-                break;
-            //TODO: j start
-            case Consts.J:
-                operation = "j";
-                type = Consts.TYPE_J;
-                System.out.println("j " + Utils.binToDecimal(instructionBin.substring(6, 32)));
-                break;
-            //TODO: bltz $1, start
-            case Consts.BLTZ:
-                operation = "bltz";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_1_REGISTRERS;
-                System.out.println("bltz" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            //TODO: beq $1, $2, start
-            case Consts.BEQ:
-                operation = "beq";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                System.out.println("beq" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            //TODO: bne $1, $2, start
-            case Consts.BNE:
-                operation = "bne";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                System.out.println("bne" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            case Consts.ADDIU:
-                operation = "addiu";
-                type = Consts.TYPE_I;
-                qtd_registres = Consts.TYPE_2_REGISTRERS;
-                hasImmediate = true;
-                System.out.println("addiu" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
-                break;
-            //TODO: jal start
-            case Consts.JAL:
-                operation = "jal";
-                type = Consts.TYPE_J;
-                System.out.println("jal " + Utils.binToDecimal(instructionBin.substring(6, 32)));
-                break;
-        }
-        if (type != null) {
-            this.setType(type);
-        }
-        if (operation != null) {
-            this.setOperationName(operation);
-        }
-        if (qtd_registres != 0) {
-            this.setQtdRegistrers(qtd_registres);
-        }
-    }
 
-    /**
-     * Método que extrai 3 registradores de uma instrução tipo R
-     * convertendo-os para o formato decimal
-     *
-     * @param instructionBin
-     */
-    public void setupInstructionTypeR3Registrers(String instructionBin) {
-        this.setRs(" " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ",");
-        this.setRt(" " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ",");
-        this.setRd(" " + "$" + Utils.binToDecimal(instructionBin.substring(16, 21)));
+                assemblyInstruction = "lui" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " +
+                        Utils.binToDecimal(instructionBin.substring(16, 32));
+                return assemblyInstruction;
+
+            case Consts.ADDI:
+
+                assemblyInstruction = "addi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                return assemblyInstruction;
+            case Consts.SLTI:
+
+                assemblyInstruction = "slti" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                return assemblyInstruction;
+
+            case Consts.ANDI:
+
+                assemblyInstruction = "andi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                return assemblyInstruction;
+            case Consts.ORI:
+
+                assemblyInstruction = ("ori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                return assemblyInstruction;
+            case Consts.XORI:
+
+                assemblyInstruction = ("xori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                return assemblyInstruction;
+
+            case Consts.LW:
+
+                assemblyInstruction = ("lw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                return assemblyInstruction;
+
+            case Consts.SW:
+
+                assemblyInstruction = ("sw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                return assemblyInstruction;
+            case Consts.J:
+
+                assemblyInstruction = ("j " + Utils.binToDecimal(instructionBin.substring(6, 32)));
+                return assemblyInstruction;
+
+            case Consts.BLTZ:
+
+                assemblyInstruction = ("bltz" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)));
+
+                return assemblyInstruction;
+            case Consts.BEQ:
+
+                assemblyInstruction = ("beq" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                return assemblyInstruction;
+
+            case Consts.BNE:
+
+                assemblyInstruction = "bne" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+
+                return assemblyInstruction;
+
+            case Consts.ADDIU:
+
+                assemblyInstruction = "addiu" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+
+                return assemblyInstruction;
+
+
+            case Consts.JAL:
+
+                assemblyInstruction = "jal " + Utils.binToDecimal(instructionBin.substring(6, 32));
+                return assemblyInstruction;
+            case Consts.LB:
+
+                assemblyInstruction = "lb" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")";
+                return assemblyInstruction;
+            case Consts.LBU:
+
+                assemblyInstruction = ("lbu" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                return assemblyInstruction;
+            case Consts.SB:
+
+                assemblyInstruction = ("sb" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                return assemblyInstruction;
+        }
+        return null;
     }
 
 }
