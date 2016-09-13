@@ -19,6 +19,7 @@ public class Consts {
     public static final String MULT_END = "011000";
     public static final String MULTU_END = "011001";
     public static final String DIV_END = "011010";
+    public static final String DIVU_END = "011011";
     public static final String SLL_END = "000000";
     public static final String SLLV_END = "000100";
     public static final String SRL_END = "000010";
@@ -45,14 +46,4 @@ public class Consts {
     public static final String LBU = "100100";
     public static final String SB = "101000";
 
-
-    public static final String TYPE_R = "R";
-    public static final String TYPE_J = "J";
-    public static final String TYPE_I = "I";
-
-    public static final int TYPE_3_REGISTRERS = 3;
-    public static final int TYPE_2_REGISTRERS = 2;
-    public static final int TYPE_1_REGISTRERS = 1;
-
-    public static final int TYPE_IMMEDIATE = 4;
 }

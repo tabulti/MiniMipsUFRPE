@@ -57,13 +57,7 @@ public class Utils {
      * @return
      */
 	public static String binToDecimal(String string){
-		int decimal = 0;
-		int potencia = 0;
-
-		for(int i = string.length() - 1; i >= 0; i--){
-			decimal += Math.pow(2, potencia) * Character.getNumericValue(string.charAt(i));
-			potencia++;
-		}
+        int decimal = Integer.valueOf(string, 2);
 		return decimal + "";
 	}
 

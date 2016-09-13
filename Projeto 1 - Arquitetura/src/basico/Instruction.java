@@ -20,120 +20,127 @@ public class Instruction {
 
 
         switch (instructionBin.substring(26, 32)) {
-            case Consts.ADD_END:
-
-                assemblyInstruction = ("add" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.ADD_END: //ADD
+                assemblyInstruction = ("add" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " +
+                        "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
 
                 return assemblyInstruction;
-            case Consts.AND_END:
 
-                assemblyInstruction = ("and" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.AND_END: //AND
+                assemblyInstruction = ("and" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " +
+                        "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
+
+            case Consts.SUB_END: //SUB
+                assemblyInstruction = ("sub" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " +
+                        "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
 
-            case Consts.SUB_END:
-
-                assemblyInstruction = ("sub" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
-                        + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
-                return assemblyInstruction;
-
-            case Consts.SLT_END:
-
-                assemblyInstruction = ("slt" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.SLT_END: //SLT
+                assemblyInstruction = ("slt" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
 
                 return assemblyInstruction;
-            case Consts.OR_END:
-                assemblyInstruction = ("or" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+
+            case Consts.OR_END: //OR
+                assemblyInstruction = ("or" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " +
+                        "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
 
                 return assemblyInstruction;
-            case Consts.NOR_END:
 
-                assemblyInstruction = ("nor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.NOR_END: //NOR
+                assemblyInstruction = ("nor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
 
-            case Consts.XOR_END:
-
-                assemblyInstruction = ("xor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.XOR_END: //XOR
+                assemblyInstruction = ("xor" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
-            case Consts.JR_END:
 
+            case Consts.JR_END: //JR
                 assemblyInstruction = ("jr" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)));
                 return assemblyInstruction;
-            case Consts.MFHI_END:
 
+            case Consts.MFHI_END: //MFHI
                 assemblyInstruction = ("mfhi" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
                 return assemblyInstruction;
-            case Consts.MFLO_END:
+
+            case Consts.MFLO_END: //MFLO
                 assemblyInstruction = ("mflo" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)));
                 return assemblyInstruction;
-            case Consts.ADDU_END:
 
-                assemblyInstruction = ("addu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.ADDU_END: //ADDU
+                assemblyInstruction = ("addu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
 
                 return assemblyInstruction;
-            case Consts.SUBU_END:
 
-                assemblyInstruction = ("subu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
+            case Consts.SUBU_END: //SUBU
+                assemblyInstruction = ("subu" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", "
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
 
-            case Consts.MULT_END:
-
+            case Consts.MULT_END: //MULT
                 assemblyInstruction = ("mult" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
                         + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
-            case Consts.MULTU_END:
 
+            case Consts.MULTU_END: //MULTU
                 assemblyInstruction = ("multu" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
                         + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
-            case Consts.DIV_END:
 
+            case Consts.DIV_END: //DIV
                 assemblyInstruction = ("div" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
                         + Utils.binToDecimal(instructionBin.substring(11, 16)));
                 return assemblyInstruction;
-            case Consts.SLL_END:
 
+            case Consts.DIVU_END: //DIVU
+                assemblyInstruction = ("multu" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + "$"
+                        + Utils.binToDecimal(instructionBin.substring(11, 16)));
+                return assemblyInstruction;
+
+            case Consts.SLL_END: //SSL
                 assemblyInstruction = ("sll" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
                 return assemblyInstruction;
-            case Consts.SLLV_END:
 
+            case Consts.SLLV_END: //SLLV
                 assemblyInstruction = ("sllv" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
-
                 return assemblyInstruction;
-            case Consts.SRL_END:
 
+            case Consts.SRL_END: //SRL
                 assemblyInstruction = ("srl" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
                 return assemblyInstruction;
 
-            case Consts.SRA_END:
-
+            case Consts.SRA_END: //SRA
                 assemblyInstruction = ("sra" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "" + Utils.binToDecimal(instructionBin.substring(21, 26)));
                 return assemblyInstruction;
 
-            case Consts.SRLV_END:
-
+            case Consts.SRLV_END: //SRLV
                 assemblyInstruction = ("srlv" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
                 return assemblyInstruction;
 
-            case Consts.SRAV_END:
-
+            case Consts.SRAV_END: //SRAV
                 assemblyInstruction = ("srav" + " $" + Utils.binToDecimal(instructionBin.substring(16, 21)) + ", " + "$" + Utils.binToDecimal(instructionBin.substring(11, 16))
                         + ", " + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)));
-
                 return assemblyInstruction;
-            case Consts.SYSCALL_END:
+
+            case Consts.SYSCALL_END: //SYSCALL
                 assemblyInstruction = "syscall";
                 return assemblyInstruction;
 
@@ -155,100 +162,87 @@ public class Instruction {
             case "000000":
                 assemblyInstruction = verifyOperationSubType(instructionBin);
                 return assemblyInstruction;
-            case Consts.LUI:
-
+            case Consts.LUI: //LUI
                 assemblyInstruction = "lui" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " +
-                        Utils.binToDecimal(instructionBin.substring(16, 32));
+                        (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
 
-            case Consts.ADDI:
-
+            case Consts.ADDI: //ADDI
                 assemblyInstruction = "addi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
-            case Consts.SLTI:
 
+            case Consts.SLTI: //SLTI
                 assemblyInstruction = "slti" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
 
-            case Consts.ANDI:
-
+            case Consts.ANDI: //ANDI
                 assemblyInstruction = "andi" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
-            case Consts.ORI:
 
+            case Consts.ORI: //ORI
                 assemblyInstruction = ("ori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2));
                 return assemblyInstruction;
-            case Consts.XORI:
 
+            case Consts.XORI: //XORI
                 assemblyInstruction = ("xori" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2));
                 return assemblyInstruction;
 
-            case Consts.LW:
-
+            case Consts.LW: //LW
                 assemblyInstruction = ("lw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + (short) Integer.parseInt(instructionBin.substring(6, 11), 2)) + ")";
                 return assemblyInstruction;
 
-            case Consts.SW:
-
+            case Consts.SW: //SW
                 assemblyInstruction = ("sw" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
-                return assemblyInstruction;
-            case Consts.J:
-
-                assemblyInstruction = ("j " + Utils.binToDecimal(instructionBin.substring(6, 32)));
+                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + (short) Integer.parseInt(instructionBin.substring(6, 11), 2)) + ")";
                 return assemblyInstruction;
 
-            case Consts.BLTZ:
+            case Consts.J: //J
+                assemblyInstruction = ("j " + (short) Integer.parseInt(instructionBin.substring(6, 32), 2));
+                return assemblyInstruction;
 
+            case Consts.BLTZ: //BLTZ
                 assemblyInstruction = ("bltz" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)));
-
+                        + (short) Integer.parseInt(instructionBin.substring(16, 32), 2));
                 return assemblyInstruction;
-            case Consts.BEQ:
 
+            case Consts.BEQ: //BEQ
                 assemblyInstruction = ("beq" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32)));
+                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2));
                 return assemblyInstruction;
 
-            case Consts.BNE:
-
+            case Consts.BNE: //BNE
                 assemblyInstruction = "bne" + " $" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
-
+                        + "$" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
 
-            case Consts.ADDIU:
-
+            case Consts.ADDIU: //ADDIU
                 assemblyInstruction = "addiu" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + Utils.binToDecimal(instructionBin.substring(16, 32));
-
+                        + "$" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ", " + (short) Integer.parseInt(instructionBin.substring(16, 32), 2);
                 return assemblyInstruction;
 
-
-            case Consts.JAL:
-
-                assemblyInstruction = "jal " + Utils.binToDecimal(instructionBin.substring(6, 32));
+            case Consts.JAL: //JAL
+                assemblyInstruction = "jal " + (short) Integer.parseInt(instructionBin.substring(6, 32), 2);
                 return assemblyInstruction;
-            case Consts.LB:
 
+            case Consts.LB: //LB
                 assemblyInstruction = "lb" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")";
+                        + (short) Integer.parseInt(instructionBin.substring(16, 32), 2) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")";
                 return assemblyInstruction;
-            case Consts.LBU:
 
+            case Consts.LBU: //LBU
                 assemblyInstruction = ("lbu" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                        + (short) Integer.parseInt(instructionBin.substring(16, 32), 2) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
                 return assemblyInstruction;
-            case Consts.SB:
 
+            case Consts.SB: //SB
                 assemblyInstruction = ("sb" + " $" + Utils.binToDecimal(instructionBin.substring(11, 16)) + ", "
-                        + Utils.binToDecimal(instructionBin.substring(16, 32)) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
+                        + (short) Integer.parseInt(instructionBin.substring(16, 32), 2) + "($" + Utils.binToDecimal(instructionBin.substring(6, 11)) + ")");
                 return assemblyInstruction;
         }
         return null;
