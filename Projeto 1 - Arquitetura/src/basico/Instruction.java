@@ -203,7 +203,7 @@ public class Instruction {
                 return assemblyInstruction;
 
             case Consts.J: //J
-                assemblyInstruction = ("j " + (short) Integer.parseInt(instructionBin.substring(6, 32), 2));
+                assemblyInstruction = ("j " + Utils.binToDecimal(instructionBin.substring(6, 32)));
                 return assemblyInstruction;
 
             case Consts.BLTZ: //BLTZ
@@ -227,7 +227,7 @@ public class Instruction {
                 return assemblyInstruction;
 
             case Consts.JAL: //JAL
-                assemblyInstruction = "jal " + (short) Integer.parseInt(instructionBin.substring(6, 32), 2);
+                assemblyInstruction = "jal " + Utils.binToDecimal(instructionBin.substring(6, 32));
                 return assemblyInstruction;
 
             case Consts.LB: //LB
