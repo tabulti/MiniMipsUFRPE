@@ -150,7 +150,6 @@ public class Instruction {
 
     /**
      * Metodo que verifica o tipo da operação e seta os parametros da instrução
-     *
      * @param instructionBin
      */
     public String verifyOperationType(String instructionBin) {
