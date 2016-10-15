@@ -153,9 +153,13 @@ public class Instruction {
      * @param instructionBin
      */
     public String verifyOperationType(String instructionBin) {
-
+        String opCode = "";
+        String rs = "";
+        String rt = "";
+        String rd = "";
+        String sh = "";
+        String func = "";
         String assemblyInstruction = "";
-
 
         switch (instructionBin.substring(0, 6)) {
             case "000000":

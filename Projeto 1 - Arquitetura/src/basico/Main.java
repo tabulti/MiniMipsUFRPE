@@ -14,9 +14,12 @@ public class Main {
 
 
 	public static void main(String[] args) {
+		BancoRegistradores bancoRegistradores = new BancoRegistradores();
+		bancoRegistradores.showValores();
 		Instruction instruction = new Instruction();
 		ArrayList<String> instructionsArrayInput;
 		ArrayList<String> instructionsArrayOutput = new ArrayList<>();
+
 
         //Lendo arquivo txt e retornando um array de instruções em hexadecimal
 		instructionsArrayInput = Utils.readFiles();
