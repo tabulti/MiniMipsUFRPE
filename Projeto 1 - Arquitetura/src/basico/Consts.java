@@ -1,8 +1,5 @@
 package basico;
 
-/**
- * Created by Joao Paulo Ribeiro on 11/09/2016.
- */
 public class Consts {
     public static final String ADD_END = "100000";
     public static final String AND_END = "100100";
@@ -41,7 +38,6 @@ public class Consts {
     public static final String BEQ = "000100";
     public static final String BLTZ = "000001";
     public static final String BNE = "000101";
-
     public static final String LB = "100000";
     public static final String LBU = "100100";
     public static final String SB = "101000";
