@@ -1,21 +1,9 @@
 package basico;
 
-/**
- * Created by Joao Paulo Ribeiro on 08/09/2016.
- */
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashMap;
-
-import static java.lang.Integer.parseInt;
+import java.util.TreeMap;
 
 public class Utils {
 
@@ -42,7 +30,7 @@ public class Utils {
      * @param number
      * @return
      */
-    public static String formater(String number) {
+    public static String formatar(String number) {
         int aux = 32 - number.length();
         char[] arrayToConcat;
         arrayToConcat = new char[aux];
@@ -71,7 +59,7 @@ public class Utils {
      *
      * @return
      */
-    public static ArrayList<String> readFiles() {
+    public static ArrayList<String> carregarInstrucoes() {
         ArrayList<String> instructionsArray = new ArrayList<>();
         int i = 0;
 
@@ -99,8 +87,8 @@ public class Utils {
         return instructionsArray;
     }
 
-    public static HashMap<String, Integer> carregarRegistradores() {
-        HashMap<String, Integer> registradores = new HashMap<>();
+    public static TreeMap<Integer, Integer> carregarRegistradores() {
+        TreeMap<Integer, Integer> registradores = new TreeMap<>();
         File file = new File(REGISTER_FILE_PATH);
 
         try {
@@ -115,7 +103,7 @@ public class Utils {
             //gravando instruções no array
             while ((line = reader.readLine()) != null) {
                 registrador = line.split("=");
-                registradores.put(registrador[0], Integer.parseInt(registrador[1]));
+                registradores.put(Integer.parseInt(registrador[0]), Integer.parseInt(registrador[1]));
             }
 
             fileReader.close();
