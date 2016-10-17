@@ -1,28 +1,52 @@
 package basico;
 
-public class J{
+public class J {
 
     private String instructionName;
     private String opCode;
-    private String adress ;
+    private String adress;
 
-    public J(String instructionName, String opCode, String adress){
+    public J(String instructionName, String opCode, String adress) {
         this.instructionName = instructionName;
         this.opCode = opCode;
+        this.adress = Utils.binToDecimal(adress);
+    }
+
+    public String getInstructionName() {
+        return instructionName;
+    }
+
+    public void setInstructionName(String instructionName) {
+        this.instructionName = instructionName;
+    }
+
+    public String getOpCode() {
+        return opCode;
+    }
+
+    public void setOpCode(String opCode) {
+        this.opCode = opCode;
+    }
+
+    public String getAdress() {
+        return adress;
+    }
+
+    public void setAdress(String adress) {
         this.adress = adress;
     }
 
-    public String getAssembly(){
+    public String getAssembly() {
         String assembly = "";
-        String label = Utils.binToDecimal(adress);
-        switch (opCode){
+
+        switch (opCode) {
             //Jump
             case Consts.J:
-                assembly = instructionName + " " + label;
+                assembly = instructionName + " " + adress;
                 break;
             //Jump and Link
             case Consts.JAL:
-                assembly = instructionName + " " + label;
+                assembly = instructionName + " " + adress;
                 break;
         }
         return assembly;
