@@ -5,13 +5,21 @@ import java.util.TreeMap;
 public class BancoRegistradores {
 
     private TreeMap<Integer, Integer> registradores;
+    private static BancoRegistradores instance;
+
+    public static BancoRegistradores getInstance(){
+        if(instance == null){
+            instance = new BancoRegistradores();
+        }
+        return instance;
+    }
 
     public BancoRegistradores() {
         registradores = new TreeMap<>();
         registradores = Utils.carregarRegistradores();
     }
 
-    public int getValor(String registrador) {
+    public int getValor(Integer registrador) {
         return registradores.get(registrador);
     }
 
