@@ -144,7 +144,7 @@ public class R {
             case Consts.SLL_END:
                 assembly = this.instructionName + " " + rd + ", " + rt + ", " + sh;
                 break;
-
+            //Shif Left Logical variable
             case Consts.SLLV_END:
                 assembly = this.instructionName + " " + rd + ", " + rt + ", " + rs;
                 break;
