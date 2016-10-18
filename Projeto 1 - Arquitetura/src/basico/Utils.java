@@ -87,8 +87,8 @@ public class Utils {
         return instructionsArray;
     }
 
-    public static TreeMap<Integer, Integer> carregarRegistradores() {
-        TreeMap<Integer, Integer> registradores = new TreeMap<>();
+    public static TreeMap<String, Integer> carregarRegistradores() {
+        TreeMap<String, Integer> registradores = new TreeMap<>();
         File file = new File(REGISTER_FILE_PATH);
 
         try {
@@ -103,7 +103,7 @@ public class Utils {
             //gravando instruções no array
             while ((line = reader.readLine()) != null) {
                 registrador = line.split("=");
-                registradores.put(Integer.parseInt(registrador[0]), Integer.parseInt(registrador[1]));
+                registradores.put(registrador[0], Integer.parseInt(registrador[1]));
             }
 
             fileReader.close();

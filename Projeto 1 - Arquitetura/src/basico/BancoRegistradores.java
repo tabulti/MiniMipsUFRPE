@@ -4,7 +4,7 @@ import java.util.TreeMap;
 
 public class BancoRegistradores {
 
-    private TreeMap<Integer, Integer> registradores;
+    private TreeMap<String, Integer> registradores;
     private static BancoRegistradores instance;
 
     public static BancoRegistradores getInstance(){
@@ -19,19 +19,19 @@ public class BancoRegistradores {
         registradores = Utils.carregarRegistradores();
     }
 
-    public int getValor(Integer registrador) {
+    public int getValor(String registrador) {
         return registradores.get(registrador);
     }
 
-    public void setValor(Integer registrador, Integer valor) {
+    public void setValor(String registrador, Integer valor) {
         this.registradores.put(registrador, valor);
     }
 
     public String showValores() {
         String valores = "";
         String registrador;
-        for (Integer key : registradores.keySet()) {
-            registrador = "$" + key + "=" + registradores.get(key) + ";";
+        for (String key : registradores.keySet()) {
+            registrador = key + "=" + registradores.get(key) + ";";
             valores += registrador;
         }
         return valores;
