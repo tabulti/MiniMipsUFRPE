@@ -3,12 +3,13 @@ package basico;
 import java.io.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class Utils {
 
     private static String FILE_PATH_OUTPUT = "arquivos/saida.txt";
-    private static String FILE_PATH_INPUT = "arquivos/entrada.txt";
+    private static String FILE_PATH_INPUT = "arquivos/entrada2.txt";
     private static String REGISTER_FILE_PATH = "arquivos/registradores.txt";
 
     /**
@@ -87,8 +88,8 @@ public class Utils {
         return instructionsArray;
     }
 
-    public static TreeMap<String, Integer> carregarRegistradores() {
-        TreeMap<String, Integer> registradores = new TreeMap<>();
+    public static LinkedHashMap<String, Integer> carregarRegistradores() {
+        LinkedHashMap<String, Integer> registradores = new LinkedHashMap<>();
         File file = new File(REGISTER_FILE_PATH);
 
         try {
