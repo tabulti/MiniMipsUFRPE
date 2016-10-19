@@ -7,7 +7,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		BancoRegistradores bancoRegistradores = BancoRegistradores.getInstance();
-		System.out.println(bancoRegistradores.showValores());
 		Decodificador instruction = new Decodificador();
 		ULA ula = ULA.getInstance();
 		Object instrucao;

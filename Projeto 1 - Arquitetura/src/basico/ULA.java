@@ -1,6 +1,6 @@
 package basico;
 
-import com.sun.xml.internal.bind.v2.TODO;
+import java.math.BigInteger;
 
 public class ULA {
 
@@ -16,6 +16,10 @@ public class ULA {
 
     public String executarInstrucao(Object instrucao) {
         Integer resultado = 0;
+        Integer HI = 0;
+        Integer LO = 0;
+        BigInteger hi;
+        BigInteger lo;
         if (instrucao instanceof R) {
             R typeR = (R) instrucao;
             String func = typeR.getFunc();
@@ -32,6 +36,7 @@ public class ULA {
 
                 //Adição(Unsigned)
                 case Consts.ADDU_END:
+                    //TODO (CHECK)
                     resultado = valorRs + valorRt;
                     registradores.setValor(rd, resultado);
                     break;
@@ -44,6 +49,7 @@ public class ULA {
 
                 //Subtração (Unsigned)
                 case Consts.SUBU_END:
+                    //TODO (CHECK)
                     resultado = valorRs - valorRt;
                     registradores.setValor(rd, resultado);
                     break;
@@ -74,32 +80,59 @@ public class ULA {
 
                 //Multiplicação
                 case Consts.MULT_END:
-                    //TODO
+                    resultado = valorRs * valorRt;
+                    String bin = Integer.toBinaryString(resultado);
+                    //Bit Mais Significativo
+                    char firstChar = bin.charAt(0);
+                    StringBuffer result = new StringBuffer();
+                    for (int i = 1; i <= (64 - bin.length()); i++) {
+                        if (firstChar == '0') {
+                            result.append("0");
+                        } else {
+                            result.append("1");
+                        }
+
+                    }
+                    result.append(bin);
+                    hi = new BigInteger(result.toString().substring(0, 32),2);
+                    lo = new BigInteger(result.toString().substring(32, 64),2);
+
+                    registradores.setValor("HI", Integer.valueOf(hi.shortValue()));
+                    registradores.setValor("LO", Integer.valueOf(lo.shortValue()));
                     break;
 
                 //Multiplicação (Unsigned)
                 case Consts.MULTU_END:
-                    //TODO
+                    //TODO (CHECK)
                     break;
 
                 //Divisão
                 case Consts.DIV_END:
-                    //TODO
+                    LO = valorRs / valorRt;
+                    HI = valorRs % valorRt;
+                    registradores.setValor("HI", HI);
+                    registradores.setValor("LO", LO);
                     break;
 
                 //Divisão (Unsigned)
                 case Consts.DIVU_END:
-                    //TODO
+                    //TODO (CHECK)
+                    LO = valorRs / valorRt;
+                    HI = valorRs % valorRt;
+                    registradores.setValor("HI", HI);
+                    registradores.setValor("LO", LO);
                     break;
 
                 //Move from HI
                 case Consts.MFHI_END:
-                    //TODO
+                    HI = registradores.getValor("HI");
+                    registradores.setValor(rd, HI);
                     break;
 
                 //Move from LO
                 case Consts.MFLO_END:
-                    //TODO
+                    LO = registradores.getValor("LO");
+                    registradores.setValor(rd, LO);
                     break;
 
                 //Set Less Than
@@ -125,13 +158,13 @@ public class ULA {
 
                 //Shift Right Logical
                 case Consts.SRL_END:
-                    resultado = valorRt >> shift;
+                    resultado = valorRt >>> shift;
                     registradores.setValor(rd, resultado);
                     break;
 
                 //Shift Right Logical Variable
                 case Consts.SRLV_END:
-                    resultado = valorRt >> valorRs;
+                    resultado = valorRt >>> valorRs;
                     registradores.setValor(rd, resultado);
                     break;
 
@@ -176,6 +209,7 @@ public class ULA {
 
                 //Adição (Imediato Unsigned)
                 case Consts.ADDIU:
+                    //TODO (CHECK)
                     resultado = valorRs + imediato;
                     registradores.setValor(rt, resultado);
                     break;

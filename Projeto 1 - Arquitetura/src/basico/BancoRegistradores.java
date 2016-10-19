@@ -1,21 +1,22 @@
 package basico;
 
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
-public class BancoRegistradores {
+public class BancoRegistradores{
 
-    private TreeMap<String, Integer> registradores;
+    private LinkedHashMap<String, Integer> registradores;
     private static BancoRegistradores instance;
 
-    public static BancoRegistradores getInstance(){
-        if(instance == null){
+    public static BancoRegistradores getInstance() {
+        if (instance == null) {
             instance = new BancoRegistradores();
         }
         return instance;
     }
 
     public BancoRegistradores() {
-        registradores = new TreeMap<>();
+        registradores = new LinkedHashMap<>();
         registradores = Utils.carregarRegistradores();
     }
 
