@@ -9,7 +9,7 @@ import java.util.TreeMap;
 public class Utils {
 
     private static String FILE_PATH_OUTPUT = "arquivos/saida.txt";
-    private static String FILE_PATH_INPUT = "arquivos/entrada2.txt";
+    private static String FILE_PATH_INPUT = "arquivos/entrada.txt";
     private static String REGISTER_FILE_PATH = "arquivos/registradores.txt";
 
     /**
