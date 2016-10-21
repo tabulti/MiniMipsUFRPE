@@ -36,7 +36,6 @@ public class ULA {
 
                 //Adição(Unsigned)
                 case Consts.ADDU_END:
-                    //TODO (CHECK)
                     resultado = valorRs + valorRt;
                     registradores.setValor(rd, resultado);
                     break;
@@ -49,7 +48,6 @@ public class ULA {
 
                 //Subtração (Unsigned)
                 case Consts.SUBU_END:
-                    //TODO (CHECK)
                     resultado = valorRs - valorRt;
                     registradores.setValor(rd, resultado);
                     break;
@@ -94,16 +92,32 @@ public class ULA {
 
                     }
                     result.append(bin);
-                    hi = new BigInteger(result.toString().substring(0, 32),2);
-                    lo = new BigInteger(result.toString().substring(32, 64),2);
-
+                    hi = new BigInteger(result.toString().substring(0, 32), 2);
+                    lo = new BigInteger(result.toString().substring(32, 64), 2);
                     registradores.setValor("HI", Integer.valueOf(hi.shortValue()));
                     registradores.setValor("LO", Integer.valueOf(lo.shortValue()));
                     break;
 
                 //Multiplicação (Unsigned)
                 case Consts.MULTU_END:
-                    //TODO (CHECK)
+                    resultado = valorRs * valorRt;
+                    String binU = Integer.toBinaryString(resultado);
+                    //Bit Mais Significativo
+                    char firstCharU = binU.charAt(0);
+                    StringBuffer resultU = new StringBuffer();
+                    for (int i = 1; i <= (64 - binU.length()); i++) {
+                        if (firstCharU == '0') {
+                            resultU.append("0");
+                        } else {
+                            resultU.append("1");
+                        }
+
+                    }
+                    resultU.append(binU);
+                    hi = new BigInteger(resultU.toString().substring(0, 32), 2);
+                    lo = new BigInteger(resultU.toString().substring(32, 64), 2);
+                    registradores.setValor("HI", Integer.valueOf(hi.shortValue()));
+                    registradores.setValor("LO", Integer.valueOf(lo.shortValue()));
                     break;
 
                 //Divisão
@@ -116,7 +130,6 @@ public class ULA {
 
                 //Divisão (Unsigned)
                 case Consts.DIVU_END:
-                    //TODO (CHECK)
                     LO = valorRs / valorRt;
                     HI = valorRs % valorRt;
                     registradores.setValor("HI", HI);
@@ -209,7 +222,6 @@ public class ULA {
 
                 //Adição (Imediato Unsigned)
                 case Consts.ADDIU:
-                    //TODO (CHECK)
                     resultado = valorRs + imediato;
                     registradores.setValor(rt, resultado);
                     break;
