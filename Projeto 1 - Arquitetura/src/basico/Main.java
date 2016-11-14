@@ -25,9 +25,13 @@ public class Main {
         //Percorre cada instrução do array
 		for(counter = 0; counter <= instrucoes.size(); counter++){
 
-			if(counter != ula.getPC()){
+			//desvio para baixo
+			if(counter < ula.getPC()){
 				counter = ula.getPC();
 
+			//condição de parada do programa
+			}else if(counter > ula.getPC()){
+				break;
 			} else {
 				//Converte para binário de 32 bits.
 				String instrucaoBinaria = Utils.formatar(Utils.converter(instrucoes.get(counter)));
@@ -39,26 +43,21 @@ public class Main {
 					typeR = (R) instrucao;
 					output.add(typeR.getAssembly());
 					output.add(ula.executarInstrucao(typeR));
-					counter++;
 				}else if(instrucao instanceof I){
 					typeI = (I) instrucao;
 					output.add(typeI.getAssembly());
 					output.add(ula.executarInstrucao(typeI));
-					counter++;
 				}else if(instrucao instanceof J){
 					typeJ = (J) instrucao;
 					output.add(typeJ.getAssembly());
 					output.add(ula.executarInstrucao(typeJ));
-					counter++;
 				}else if(instrucao instanceof String){
 					output.add(instrucao.toString());
 					output.add(ula.executarInstrucao(instrucao));
-					counter++;
 				}
 			}
 
 		}
-
 		//Escreve no Arquivo de Saída
 	    Utils.writeFiles(output);
 

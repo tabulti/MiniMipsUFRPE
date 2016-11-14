@@ -289,34 +289,41 @@ public class ULA {
 
                 //Load Byte
                 case Consts.LB:
+                    PC++;
                     //TODO
                     break;
 
                 //Load Byte (Unsigned)
                 case Consts.LBU:
+                    PC++;
                     //TODO
                     break;
 
                 //Store Byte
                 case Consts.SB:
+                    PC++;
                     //TODO
                     break;
 
                 //Store Word
                 case Consts.SW:
+                    PC++;
                     //TODO
                     break;
 
                 //Load Word
                 case Consts.LW:
+                    PC++;
                     //TODO
                     break;
 
                 //Branch equals
                 case Consts.BEQ:
                     if (valorRs == valorRt) {
+                        PC++;
                         //GO TO (PC + 4 + IMM)
                     } else {
+                        PC++;
                         //PC + 4
                     }
                     break;
@@ -324,8 +331,10 @@ public class ULA {
                 //Branch not equals
                 case Consts.BNE:
                     if (valorRs != valorRt) {
+                        PC++;
                         //GO TO (PC + 4 + IMM)
                     } else {
+                        PC++;
                         //PC + 4
                     }
                     break;
@@ -333,8 +342,10 @@ public class ULA {
                 //Branch less than zero
                 case Consts.BLTZ:
                     if (valorRs < 0) {
+                        PC++;
                         //GO TO (PC + 4 + IMM)
                     } else {
+                        PC++;
                         //PC + 4
                     }
                     break;
@@ -350,6 +361,7 @@ public class ULA {
 
                 //Jump and Link
                 case Consts.JAL:
+                    PC++;
                     //TODO (GO TO ADRESS AND $31 = PC + 4)
                     break;
             }
