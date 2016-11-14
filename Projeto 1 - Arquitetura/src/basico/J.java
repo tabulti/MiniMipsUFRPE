@@ -32,6 +32,10 @@ public class J {
         return adress;
     }
 
+    public int getDecimalAdress(){
+        return Integer.parseInt(Utils.binToDecimal(adress));
+    }
+
     public void setAdress(String adress) {
         this.adress = adress;
     }

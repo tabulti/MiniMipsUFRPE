@@ -6,6 +6,11 @@ public class ULA {
 
     private static ULA instance;
     private BancoRegistradores registradores = BancoRegistradores.getInstance();
+    private int PC = 0;
+
+    public int getPC(){
+        return PC;
+    }
 
     public static ULA getInstance() {
         if (instance == null) {
@@ -32,48 +37,56 @@ public class ULA {
                 case Consts.ADD_END:
                     resultado = valorRs + valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Adição(Unsigned)
                 case Consts.ADDU_END:
                     resultado = valorRs + valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Subtração
                 case Consts.SUB_END:
                     resultado = valorRs - valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Subtração (Unsigned)
                 case Consts.SUBU_END:
                     resultado = valorRs - valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //OR
                 case Consts.OR_END:
                     resultado = valorRs | valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //AND
                 case Consts.AND_END:
                     resultado = valorRs & valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //NOR
                 case Consts.NOR_END:
                     resultado = ~(valorRs | valorRt);
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //XOR
                 case Consts.XOR_END:
                     resultado = valorRs ^ valorRt;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Multiplicação
@@ -96,6 +109,7 @@ public class ULA {
                     lo = new BigInteger(result.toString().substring(32, 64), 2);
                     registradores.setValor("HI", Integer.valueOf(hi.shortValue()));
                     registradores.setValor("LO", Integer.valueOf(lo.shortValue()));
+                    PC++;
                     break;
 
                 //Multiplicação (Unsigned)
@@ -118,6 +132,7 @@ public class ULA {
                     lo = new BigInteger(resultU.toString().substring(32, 64), 2);
                     registradores.setValor("HI", Integer.valueOf(hi.shortValue()));
                     registradores.setValor("LO", Integer.valueOf(lo.shortValue()));
+                    PC++;
                     break;
 
                 //Divisão
@@ -126,6 +141,7 @@ public class ULA {
                     HI = valorRs % valorRt;
                     registradores.setValor("HI", HI);
                     registradores.setValor("LO", LO);
+                    PC++;
                     break;
 
                 //Divisão (Unsigned)
@@ -134,18 +150,21 @@ public class ULA {
                     HI = valorRs % valorRt;
                     registradores.setValor("HI", HI);
                     registradores.setValor("LO", LO);
+                    PC++;
                     break;
 
                 //Move from HI
                 case Consts.MFHI_END:
                     HI = registradores.getValor("HI");
                     registradores.setValor(rd, HI);
+                    PC++;
                     break;
 
                 //Move from LO
                 case Consts.MFLO_END:
                     LO = registradores.getValor("LO");
                     registradores.setValor(rd, LO);
+                    PC++;
                     break;
 
                 //Set Less Than
@@ -155,47 +174,55 @@ public class ULA {
                         resultado = 1;
                     }
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shif Left Logical
                 case Consts.SLL_END:
                     resultado = valorRt << shift;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shift left logical variable
                 case Consts.SLLV_END:
                     resultado = valorRt << valorRs;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shift Right Logical
                 case Consts.SRL_END:
                     resultado = valorRt >>> shift;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shift Right Logical Variable
                 case Consts.SRLV_END:
                     resultado = valorRt >>> valorRs;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shift Right Arithmetic
                 case Consts.SRA_END:
                     resultado = valorRt >> shift;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Shift Right Arithmetic Variable
                 case Consts.SRAV_END:
                     resultado = valorRt >> valorRs;
                     registradores.setValor(rd, resultado);
+                    PC++;
                     break;
 
                 //Jump Register
                 case Consts.JR_END:
-                    //TODO (JUMP TO RS)
+                    resultado = valorRs;
+                    PC = PC + resultado;
                     break;
             }
 
@@ -212,18 +239,21 @@ public class ULA {
                 case Consts.LUI:
                     resultado = imediato << 16;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //Adição com Imediato
                 case Consts.ADDI:
                     resultado = valorRs + imediato;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //Adição (Imediato Unsigned)
                 case Consts.ADDIU:
                     resultado = valorRs + imediato;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //Set less than imediate
@@ -233,24 +263,28 @@ public class ULA {
                         resultado = 1;
                     }
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //AND (Imediato)
                 case Consts.ANDI:
                     resultado = valorRs & imediato;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //OR (Imediato)
                 case Consts.ORI:
                     resultado = valorRs | imediato;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //XOR (Imediato)
                 case Consts.XORI:
                     resultado = valorRs ^ imediato;
                     registradores.setValor(rt, resultado);
+                    PC++;
                     break;
 
                 //Load Byte
@@ -311,7 +345,7 @@ public class ULA {
             switch (opCode) {
                 //Jump
                 case Consts.J:
-                    //TODO (JUMP TO ADRESS)
+                    PC = typeJ.getDecimalAdress();
                     break;
 
                 //Jump and Link

@@ -20,30 +20,41 @@ public class Main {
         //Carrega todas as instruções em HEXADECIMAL
 		instrucoes = Utils.carregarInstrucoes();
 
+		int counter;
+
         //Percorre cada instrução do array
-		for (String string : instrucoes) {
+		for(counter = 0; counter <= instrucoes.size(); counter++){
 
-		    //Converte para binário de 32 bits.
-			String instrucaoBinaria = Utils.formatar(Utils.converter(string));
+			if(counter != ula.getPC()){
+				counter = ula.getPC();
 
-            //Decodifica a Instrução (Tipo R, I, J)
-            instrucao = instruction.decodificar(instrucaoBinaria);
+			} else {
+				//Converte para binário de 32 bits.
+				String instrucaoBinaria = Utils.formatar(Utils.converter(instrucoes.get(counter)));
 
-			if(instrucao instanceof R){
-				typeR = (R) instrucao;
-				output.add(typeR.getAssembly());
-				output.add(ula.executarInstrucao(typeR));
-			}else if(instrucao instanceof I){
-				typeI = (I) instrucao;
-				output.add(typeI.getAssembly());
-				output.add(ula.executarInstrucao(typeI));
-			}else if(instrucao instanceof J){
-				typeJ = (J) instrucao;
-				output.add(typeJ.getAssembly());
-				output.add(ula.executarInstrucao(typeJ));
-			}else if(instrucao instanceof String){
-				output.add(instrucao.toString());
-				output.add(ula.executarInstrucao(instrucao));
+				//Decodifica a Instrução (Tipo R, I, J)
+				instrucao = instruction.decodificar(instrucaoBinaria);
+
+				if(instrucao instanceof R){
+					typeR = (R) instrucao;
+					output.add(typeR.getAssembly());
+					output.add(ula.executarInstrucao(typeR));
+					counter++;
+				}else if(instrucao instanceof I){
+					typeI = (I) instrucao;
+					output.add(typeI.getAssembly());
+					output.add(ula.executarInstrucao(typeI));
+					counter++;
+				}else if(instrucao instanceof J){
+					typeJ = (J) instrucao;
+					output.add(typeJ.getAssembly());
+					output.add(ula.executarInstrucao(typeJ));
+					counter++;
+				}else if(instrucao instanceof String){
+					output.add(instrucao.toString());
+					output.add(ula.executarInstrucao(instrucao));
+					counter++;
+				}
 			}
 
 		}
