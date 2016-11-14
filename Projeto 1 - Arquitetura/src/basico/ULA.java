@@ -345,7 +345,7 @@ public class ULA {
             switch (opCode) {
                 //Jump
                 case Consts.J:
-                    PC = typeJ.getDecimalAdress();
+                    PC = typeJ.getDecimalAdress() / 4;
                     break;
 
                 //Jump and Link
