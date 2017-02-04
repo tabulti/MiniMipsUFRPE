@@ -5,61 +5,63 @@ import java.util.ArrayList;
 public class Main {
 
 
-	public static void main(String[] args) {
-		BancoRegistradores bancoRegistradores = BancoRegistradores.getInstance();
-		Decodificador instruction = new Decodificador();
-		ULA ula = ULA.getInstance();
-		Object instrucao;
-		R typeR;
-		I typeI;
-		J typeJ;
+    public static void main(String[] args) {
+        BancoRegistradores bancoRegistradores = BancoRegistradores.getInstance();
+        Decodificador instruction = new Decodificador();
+        ULA ula = ULA.getInstance();
+        Object instrucao;
+        R typeR;
+        I typeI;
+        J typeJ;
 
-		ArrayList<String> instrucoes;
-		ArrayList<String> output = new ArrayList<>();
+        ArrayList<String> instrucoes;
+        ArrayList<String> output = new ArrayList<>();
 
-        //Carrega todas as instruções em HEXADECIMAL
-		instrucoes = Utils.carregarInstrucoes();
+        //Carrega todas as instruï¿½ï¿½es em HEXADECIMAL
+        instrucoes = Utils.carregarInstrucoes();
+        int counter;
+        int indexInstr = 0;
+        //Percorre cada instruï¿½ï¿½o do array
+        for (counter = 0; counter < (instrucoes.size() * 4); counter += 4) {
+            indexInstr = counter / 4;
+            //desvio para baixo
 
-		int counter;
+            //Converte para binï¿½rio de 32 bits.
+            String instrucaoBinaria = Utils.formatar(Utils.converter(instrucoes.get(indexInstr)));
 
-        //Percorre cada instrução do array
-		for(counter = 0; counter <= instrucoes.size(); counter++){
+            //Decodifica a Instruï¿½ï¿½o (Tipo R, I, J)
+            instrucao = instruction.decodificar(instrucaoBinaria);
+            System.out.println("Indice: " + indexInstr);
 
-			//desvio para baixo
-			if(counter < ula.getPC()){
-				counter = ula.getPC();
 
-			//condição de parada do programa
-			}else if(counter > ula.getPC()){
-				break;
-			} else {
-				//Converte para binário de 32 bits.
-				String instrucaoBinaria = Utils.formatar(Utils.converter(instrucoes.get(counter)));
+            if (instrucao instanceof R) {
+                typeR = (R) instrucao;
+                output.add(typeR.getAssembly());
+                System.out.println("TYPE R: " + typeR.getAssembly());
+                output.add(ula.executarInstrucao(typeR, counter));
+            } else if (instrucao instanceof I) {
+                typeI = (I) instrucao;
+                output.add(typeI.getAssembly());
+                System.out.println("TYPE I: " + typeI.getAssembly());
+                output.add(ula.executarInstrucao(typeI, counter));
+            } else if (instrucao instanceof J) {
+                typeJ = (J) instrucao;
+                output.add(typeJ.getAssembly());
+                output.add(ula.executarInstrucao(typeJ, counter));
+                System.out.println("TYPE J: " + typeJ.getAssembly());
+            } else if (instrucao instanceof String) {
+                output.add(instrucao.toString());
+                output.add(ula.executarInstrucao(instrucao, counter));
+            }
 
-				//Decodifica a Instrução (Tipo R, I, J)
-				instrucao = instruction.decodificar(instrucaoBinaria);
+            if (ula.isJump()) {
+                counter = ula.getJump();
+            }
 
-				if(instrucao instanceof R){
-					typeR = (R) instrucao;
-					output.add(typeR.getAssembly());
-					output.add(ula.executarInstrucao(typeR));
-				}else if(instrucao instanceof I){
-					typeI = (I) instrucao;
-					output.add(typeI.getAssembly());
-					output.add(ula.executarInstrucao(typeI));
-				}else if(instrucao instanceof J){
-					typeJ = (J) instrucao;
-					output.add(typeJ.getAssembly());
-					output.add(ula.executarInstrucao(typeJ));
-				}else if(instrucao instanceof String){
-					output.add(instrucao.toString());
-					output.add(ula.executarInstrucao(instrucao));
-				}
-			}
 
-		}
-		//Escreve no Arquivo de Saída
-	    Utils.writeFiles(output);
+        }
+        //Escreve no Arquivo de Saï¿½da
+        Utils.writeFiles(output);
 
     }
 

@@ -9,12 +9,12 @@ import java.util.TreeMap;
 public class Utils {
 
     private static String FILE_PATH_OUTPUT = "arquivos/saida.txt";
-    private static String FILE_PATH_INPUT = "arquivos/entrada3.txt";
+    private static String FILE_PATH_INPUT = "arquivos/entrada.txt";
     private static String REGISTER_FILE_PATH = "arquivos/registradores.txt";
 
     /**
-     * Método que converte um numero hexadecimal no formato 0x0000000000
-     * para um binário de 32 bits
+     * Mï¿½todo que converte um numero hexadecimal no formato 0x0000000000
+     * para um binï¿½rio de 32 bits
      *
      * @param number
      * @return
@@ -26,7 +26,7 @@ public class Utils {
     }
 
     /**
-     * Método que completa um binario com menos de 32 bits com 0's a esquerda
+     * Mï¿½todo que completa um binario com menos de 32 bits com 0's a esquerda
      *
      * @param number
      * @return
@@ -45,7 +45,7 @@ public class Utils {
     }
 
     /**
-     * Método que converte um binário para decimal
+     * Mï¿½todo que converte um binï¿½rio para decimal
      *
      * @param string
      * @return
@@ -56,7 +56,7 @@ public class Utils {
     }
 
     /**
-     * Metodo para ler instruções de um arquivo txt
+     * Metodo para ler instruï¿½ï¿½es de um arquivo txt
      *
      * @return
      */
@@ -72,7 +72,7 @@ public class Utils {
             String data = null;
             String count = null;
 
-            //gravando instruções no array
+            //gravando instruï¿½ï¿½es no array
             while ((data = reader.readLine()) != null) {
                 instructionsArray.add(i, data);
                 i++;
@@ -101,7 +101,7 @@ public class Utils {
             Integer valorRegistrador = 0;
 
 
-            //gravando instruções no array
+            //gravando instruï¿½ï¿½es no array
             while ((line = reader.readLine()) != null) {
                 registrador = line.split("=");
                 registradores.put(registrador[0], Integer.parseInt(registrador[1]));
@@ -119,7 +119,7 @@ public class Utils {
     }
 
     /**
-     * Método para escrever instruções em um arquivo txt.
+     * Mï¿½todo para escrever instruï¿½ï¿½es em um arquivo txt.
      *
      * @param instructions
      */
@@ -139,4 +139,74 @@ public class Utils {
 
     }
 
+    public static int getByte(String value, int position) {
+        String aux = value;
+        String result = "";
+
+        if (aux.charAt(0) == '1') {
+            aux = twoComplement(aux);
+        }
+        for (int i = aux.length(); i < 32; i++) {
+            aux = "0" + aux;
+        }
+        for (int i = 31 - (position * 8); i > 23 - (position * 8); i--) {
+            result = aux.charAt(i) + result;
+        }
+
+        if (value.charAt(0) == '1') {
+            return Integer.parseInt(aux, 2) * -1;
+        } else {
+            return Integer.parseInt(aux, 2);
+        }
+    }
+
+    public static int getByteU(String value, int position) {
+        String result = "";
+        for (int i = value.length(); i < 32; i++) {
+            value = "0" + value;
+        }
+        for (int i = 31 - (position * 8); i > 23 - (position * 8); i--) {
+            result = value.charAt(i) + result;
+        }
+        return Integer.parseInt(result, 2);
+    }
+
+    public static String twoComplement(String value) {
+        String[] split = value.split("");
+        value = "";
+        boolean status = false;
+        for (int i = split.length - 1; i >= 0; i--) {
+            if (status && split[i].equals("0")) {
+                value = "1" + value;
+            } else if (!status && split[i].equals("0")) {
+                value = "0" + value;
+            } else if (status && split[i].equals("1")) {
+                value = "0" + value;
+            } else if (!status && split[i].equals("1")) {
+                value = "1" + value;
+                status = true;
+            }
+        }
+        return value;
+    }
+
+    public static String setByte(String value, int position, int nValue) {
+        String aux = value;
+        String result = "";
+        String newValue = Integer.toBinaryString(nValue);
+
+        for (int i = newValue.length(); i < 32; i++) newValue = "0" + newValue;
+        newValue = newValue.substring(newValue.length() - 8, newValue.length());
+
+        for (int i = aux.length(); i < 32; i++) aux = "0" + aux;
+        int j = 0;
+        for (int i = 0; i < 32; i++) {
+            if (i > 23 - (position * 8) && i < 31 - (position * 8)) {
+                result += newValue.charAt(j);
+                j++;
+            } else result += aux.charAt(i);
+        }
+
+        return result;
+    }
 }

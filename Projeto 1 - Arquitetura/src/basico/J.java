@@ -9,7 +9,7 @@ public class J {
     public J(String instructionName, String opCode, String adress) {
         this.instructionName = instructionName;
         this.opCode = opCode;
-        this.adress = Utils.binToDecimal(adress);
+        this.adress = Integer.parseInt(adress, 2) + "";
     }
 
     public String getInstructionName() {
@@ -32,7 +32,7 @@ public class J {
         return adress;
     }
 
-    public int getDecimalAdress(){
+    public int getDecimalAdress() {
         return Integer.parseInt(Utils.binToDecimal(adress));
     }
 
